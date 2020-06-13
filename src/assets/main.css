@@ -14343,6 +14343,31 @@ video {
   transition-delay: 1000ms;
 }
 
+.loader {
+  border-top-color: #f56565;
+  animation: spinner 1.5s linear infinite;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d3c6c6 !important;
+  border-radius: 6px !important;
+  padding: 12px;
+}
+
 @media (min-width: 640px) {
   .sm\:space-y-0 > :not(template) ~ :not(template) {
     --space-y-reverse: 0;
