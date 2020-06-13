@@ -250,7 +250,7 @@ const Register = () => {
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
                 /* if the input values aren't valid the user can't submit the form */
-                disabled={!emailValid && !nameValid && !validPassword}
+                disabled={!nameValid && !emailValid && !validPassword}
               >
                 Sign In
               </button>

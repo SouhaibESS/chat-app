@@ -1,11 +1,33 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Page, Button } from "../components";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
+import { logout, isLoggedIn, getToken } from "../helpers";
+import { API_URL } from "../config";
 
 const Home = () => {
   const links = ["login", "register"];
+  const history = useHistory();
+
+  const handelClick = async (event) => {
+    event.preventDefault();
+    if (!isLoggedIn()) {
+      const token = getToken();
+      const fetchedResponse = await fetch(`${API_URL}/logout`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      });
+      const response = await fetchedResponse.json();
+    }
+    logout();
+    console.log("logout");
+    history.push("/login");
+  };
 
   return (
     <Page>
@@ -36,6 +58,7 @@ const Home = () => {
               </Button>
             </Link>
           ))}
+          <button onClick={handelClick}>Logout</button>
         </div>
       </motion.div>
     </Page>
