@@ -12,7 +12,7 @@ const Home = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 2, delay: 0.2 }}
+        transition={{ duration: 1, delay: 0.1 }}
         className="shadow-lg border rounded-lg h-full w-full bg-white"
       >
         <h1 className="text-center font-serif text-3xl mt-10 font-bold ">
