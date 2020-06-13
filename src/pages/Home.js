@@ -3,6 +3,7 @@ import { Page, Button } from "../components";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
+import { Spinner } from "../components/Custom";
 
 const Home = () => {
   const links = ["login", "register"];
@@ -36,6 +37,7 @@ const Home = () => {
               </Button>
             </Link>
           ))}
+          <Spinner />
         </div>
       </motion.div>
     </Page>
