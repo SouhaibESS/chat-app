@@ -4,12 +4,8 @@ import { Page, Button } from "../components";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
-<<<<<<< HEAD
 import { logout, isLoggedIn, getToken } from "../helpers";
 import { API_URL } from "../config";
-=======
-import { Spinner } from "../components/Custom";
->>>>>>> 58e7fd9ccb4ed24aec4a161688119243aae082a1
 
 const Home = () => {
   const links = ["login", "register"];
@@ -27,9 +23,9 @@ const Home = () => {
         },
       });
       const response = await fetchedResponse.json();
+      if (response.success) logout();
     }
-    logout();
-    console.log("logout");
+
     history.push("/login");
   };
 
@@ -62,11 +58,7 @@ const Home = () => {
               </Button>
             </Link>
           ))}
-<<<<<<< HEAD
           <button onClick={handelClick}>Logout</button>
-=======
-          <Spinner />
->>>>>>> 58e7fd9ccb4ed24aec4a161688119243aae082a1
         </div>
       </motion.div>
     </Page>

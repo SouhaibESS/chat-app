@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Spinner } from '../../components/Custom'
+import { Spinner } from "../../components/Custom";
 import { login } from "../../helpers";
 import { Page } from "../../components";
 import { motion } from "framer-motion";
@@ -171,7 +171,7 @@ const Login = () => {
               <Spinner />
             ) : (
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-purple-400 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
                 /* if the input values aren't valid the user can't submit the form */
                 disabled={!validEmail && !validPassword}
@@ -181,7 +181,7 @@ const Login = () => {
             )}
             <Link
               to="/register"
-              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+              className="inline-block align-baseline font-bold text-sm text-purple-400 hover:text-purple-700"
               href="#"
             >
               Dont have an Account ?
