@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Spinner } from '../../components/Custom'
 import { API_URL } from "../../config";
 import { Page } from "../../components";
 import { motion } from "framer-motion";
@@ -243,8 +244,7 @@ const Register = () => {
           </div>
           <div className="flex items-center justify-between">
             {loading ? (
-              // TODO SPINNER <---------------------------------------------------------------
-              "loading"
+              <Spinner />
             ) : (
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
