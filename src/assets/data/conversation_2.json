@@ -1,0 +1,92 @@
+/**
+* hna keyna conversation wehda 
+* messages array dyal ga3 les messages li f had conversation 
+* kola message fih id dyal li sifto w body dyal message w statu wash seen or not w tarikh li tsifet fih dak msg 
+* w atl9a f lkher other_user fiha infos 3la user akhor id dyalo email, name ... dik is_registred ma tdihash fiha  
+*/
+
+{
+    "conversation": {
+        "id": 2,
+        "messages": [
+            {
+                "user_id": 1,
+                "message": "salam a zbi!",
+                "seen": 0,
+                "created_at": "2020-06-04T21:35:05.000000Z"
+            },
+            {
+                "user_id": 3,
+                "message": "salam a zbi!",
+                "seen": 0,
+                "created_at": "2020-06-04T21:35:21.000000Z"
+            },
+            {
+                "user_id": 1,
+                "message": "fen a zbi",
+                "seen": 0,
+                "created_at": "2020-06-05T00:13:03.000000Z"
+            },
+            {
+                "user_id": 1,
+                "message": "ghi test hada",
+                "seen": 0,
+                "created_at": "2020-06-05T00:18:06.000000Z"
+            },
+            {
+                "user_id": 1,
+                "message": "test akhor",
+                "seen": 0,
+                "created_at": "2020-06-05T19:43:21.000000Z"
+            },
+            {
+                "user_id": 1,
+                "message": "message from websockets yaay!",
+                "seen": 0,
+                "created_at": "2020-06-07T20:26:44.000000Z"
+            },
+            {
+                "user_id": 1,
+                "message": "message from websockets yaay!",
+                "seen": 0,
+                "created_at": "2020-06-07T20:27:28.000000Z"
+            },
+            {
+                "user_id": 1,
+                "message": "another message from ws server!",
+                "seen": 0,
+                "created_at": "2020-06-07T20:30:45.000000Z"
+            },
+            {
+                "user_id": 1,
+                "message": "another message from ws server!",
+                "seen": 0,
+                "created_at": "2020-06-07T20:31:22.000000Z"
+            },
+            {
+                "user_id": 1,
+                "message": "another message from ws server!",
+                "seen": 0,
+                "created_at": "2020-06-07T20:32:24.000000Z"
+            },
+            {
+                "user_id": 3,
+                "message": "msg bla csrf-token, ya rbi tkhdem!",
+                "seen": 0,
+                "created_at": "2020-06-07T20:36:32.000000Z"
+            },
+            {
+                "user_id": 3,
+                "message": "msg akhor bla csrf-token, khdam mzyan hedshi",
+                "seen": 0,
+                "created_at": "2020-06-07T20:38:14.000000Z"
+            }
+        ],
+        "other_user": {
+            "name": "contact wsafe",
+            "email": "user@email.com",
+            "id": 3,
+            "is_registered": 1
+        }
+    }
+}

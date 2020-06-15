@@ -1,0 +1,76 @@
+
+/** 
+* hna 3andek array d conversations 
+* kola conversation fiha id
+* last_message fih akhir message tsifet f had conversation 
+* other_user infos 3la l user lakhor
+*/
+{
+   "conversations": [
+        {
+            "id": 6,
+            "last_message": {
+                "user_id": 8,
+                "message": "msg mn private channel, bla csrf-token!",
+                "seen": 0,
+                "created_at": "2020-06-07T22:58:36.000000Z"
+            },
+            "other_user": {
+                "name": "yasser essarghini",
+                "email": "yasser@email.com",
+                "id": 8,
+                "is_registered": 1
+            }
+        },
+        {
+            "id": 2,
+            "last_message": {
+                "user_id": 3,
+                "message": "msg akhor bla csrf-token, khdam mzyan hedshi",
+                "seen": 0,
+                "created_at": "2020-06-07T20:38:14.000000Z"
+            },
+            "other_user": {
+                "name": "contact wsafe",
+                "email": "user@email.com",
+                "id": 3,
+                "is_registered": 1
+            }
+        },
+        {
+            "id": 5,
+            "last_message": null,
+            "other_user": {
+                "name": "siksnayn",
+                "email": "test69@test.com",
+                "id": 7,
+                "is_registered": 1
+            }
+        },
+        {
+            "id": 3,
+            "last_message": null,
+            "other_user": {
+                "name": "contact wsafe",
+                "email": "user@email.com",
+                "id": 3,
+                "is_registered": 1
+            }
+        },
+        {
+            "id": 1,
+            "last_message": {
+                "user_id": 1,
+                "message": "ghi test hada",
+                "seen": 0,
+                "created_at": "2020-06-05T19:41:41.000000Z"
+            },
+            "other_user": {
+                "name": "contact1",
+                "email": "souhaib@email.com",
+                "id": 2,
+                "is_registered": 1
+            }
+        }
+    ] 
+}
