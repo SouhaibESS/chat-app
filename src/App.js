@@ -8,7 +8,7 @@ function App() {
     <>
       <Switch>
         {/* just passing multiple paths for the home page */}
-        <PrivateRoute component={Home} path="/" exact />
+        <PublicRoute component={Home} path="/" exact />
         <PublicRoute restricted={true} component={Login} path="/login" exact />
         <PublicRoute
           restricted={true}
