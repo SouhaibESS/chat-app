@@ -1,6 +1,7 @@
 import { API_URL } from "./config";
 
 const TOKEN_KEY = "jwt";
+const USER = "user";
 const SECOND = 1000; // one second in miliseconds
 
 const setUser = (token) => {
@@ -13,7 +14,7 @@ const setUser = (token) => {
   })
     .then((response) => response.json())
     .then((user) => {
-      localStorage.setItem("user", JSON.stringify(user.user));
+      localStorage.setItem(USER, JSON.stringify(user.user));
     });
 };
 
@@ -32,7 +33,7 @@ export const login = (item) => {
 
 export const logout = () => {
   localStorage.removeItem(TOKEN_KEY);
-  localStorage.removeItem('user')
+  localStorage.removeItem(USER);
 };
 
 export const isLoggedIn = () => {
@@ -62,9 +63,8 @@ export const getToken = () => {
 
 export const getUser = () => {
   if (isLoggedIn()) {
-    let user = localStorage.getItem("user");
+    let user = localStorage.getItem(USER);
     user = JSON.parse(user);
-
     return user;
   }
 };

@@ -41,6 +41,7 @@ const ContactsList = ({setCurrentConversation}) => {
       { // TODO SPINNER WHEN THE PAGE IS LOADING
         conversations
           .filter((conversation) => conversation.last_message)
+          .reverse()
           .map((conversation, index) => <ContactSummary setCurrentConversation={setCurrentConversation} conversation={conversation} key={index} />)
       }
     </div>
