@@ -4,7 +4,8 @@ import contacts from "../../../assets/data/contacts";
 import { API_URL } from "../../../config";
 import { getToken } from "../../../helpers";
 
-const ContactsList = () => {
+const ContactsList = ({setCurrentConversation}) => {
+  
   const [conversations, setConversations] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -40,7 +41,7 @@ const ContactsList = () => {
       { // TODO SPINNER WHEN THE PAGE IS LOADING
         conversations
           .filter((conversation) => conversation.last_message)
-          .map((conversation, index) => <ContactSummary conversation={conversation} key={index} />)
+          .map((conversation, index) => <ContactSummary setCurrentConversation={setCurrentConversation} conversation={conversation} key={index} />)
       }
     </div>
   );

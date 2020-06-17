@@ -1,5 +1,21 @@
+import { API_URL } from "./config";
+
 const TOKEN_KEY = "jwt";
 const SECOND = 1000; // one second in miliseconds
+
+const setUser = (token) => {
+  fetch(`${API_URL}/user`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+  })
+    .then((response) => response.json())
+    .then((user) => {
+      localStorage.setItem("user", JSON.stringify(user.user));
+    });
+};
 
 export const login = (item) => {
   const now = new Date();
@@ -10,11 +26,13 @@ export const login = (item) => {
     expiry: now.getTime() + item.expiresIn * SECOND,
   };
 
+  setUser(token.value);
   localStorage.setItem(TOKEN_KEY, JSON.stringify(token));
 };
 
 export const logout = () => {
   localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem('user')
 };
 
 export const isLoggedIn = () => {
@@ -40,4 +58,13 @@ export const getToken = () => {
   const { value } = JSON.parse(item);
 
   return value;
+};
+
+export const getUser = () => {
+  if (isLoggedIn()) {
+    let user = localStorage.getItem("user");
+    user = JSON.parse(user);
+
+    return user;
+  }
 };
