@@ -124,8 +124,8 @@ const Register = () => {
 
       setLoading(false);
 
-      // redirect to login page
-      history.push("/login");
+      // redirect to homepage
+      history.push("/");
     }
   };
 

@@ -37,7 +37,7 @@ export const isLoggedIn = () => {
 
 export const getToken = () => {
   const item = localStorage.getItem(TOKEN_KEY);
-  const { value } = item;
+  const { value } = JSON.parse(item);
 
   return value;
 };
