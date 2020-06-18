@@ -1,6 +1,6 @@
 import React from "react";
 
-const ContactSummary = ({ conversation, setCurrentConversation }) => {
+const ConversationSummary = ({ conversation, setCurrentConversation }) => {
   let user = conversation.other_user;
   let { message, seen } = conversation.last_message;
 
@@ -25,4 +25,4 @@ const ContactSummary = ({ conversation, setCurrentConversation }) => {
   );
 };
 
-export default ContactSummary;
+export default ConversationSummary;

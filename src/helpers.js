@@ -55,10 +55,12 @@ export const isLoggedIn = () => {
 };
 
 export const getToken = () => {
-  const item = localStorage.getItem(TOKEN_KEY);
-  const { value } = JSON.parse(item);
+  if (isLoggedIn()) {
+    const item = localStorage.getItem(TOKEN_KEY);
+    const { value } = JSON.parse(item);
 
-  return value;
+    return value;
+  }
 };
 
 export const getUser = () => {

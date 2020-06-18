@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Dashboard from "../Chats/Dashboard/Dashboard";
-import Contacts from "../Chats/Contacts/Contacts";
+import Conversations from "./Contacts/Conversations";
 import Conversation from "../Chats/Conversation/Conversation";
 import { motion } from "framer-motion";
 const Chats = () => {
@@ -18,7 +18,7 @@ const Chats = () => {
       className="shadow-lg border p-1 rounded-lg h-full w-full bg-white flex"
     >
       <Dashboard />
-      <Contacts setCurrentConversation={setCurrentConversation} />
+      <Conversations setCurrentConversation={setCurrentConversation} />
       <Conversation conversation={conversation} />
     </motion.div>
   );
