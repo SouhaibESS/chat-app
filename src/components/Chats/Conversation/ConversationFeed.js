@@ -8,6 +8,7 @@ const ConversationsFeed = ({ messages }) => {
   const user = getUser();
   const messagesEndRef = useRef(null);
 
+  // auto scroll to bottom when a message is sent or received
   const scrollToBottom = () => {
     messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
   };

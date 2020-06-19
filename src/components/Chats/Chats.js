@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Dashboard from "../Chats/Dashboard/Dashboard";
-import Conversations from "./Contacts/Conversations";
+import Conversations from "./Conversations/Conversations";
 import Conversation from "../Chats/Conversation/Conversation";
 import { motion } from "framer-motion";
 const Chats = () => {
