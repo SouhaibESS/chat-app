@@ -1,8 +1,10 @@
 import React from "react";
+import { getUser } from '../../../helpers'
 
 const ConversationSummary = ({ conversation, setCurrentConversation }) => {
   let user = conversation.other_user;
   let { message, seen } = conversation.last_message;
+  let authUser = getUser()
 
   return (
     <a onClick={() => setCurrentConversation(conversation)}>
@@ -17,7 +19,8 @@ const ConversationSummary = ({ conversation, setCurrentConversation }) => {
         <div>
           <h5 className="font-bold">{user.name}</h5>
           <p className=" font-hairline">
-            {message.length < 25 ? message : `${message.substring(0, 25)}...`}
+            {conversation.last_message.user_id == authUser.id ? 'You: ' : ''}
+            {message.length < 25 ?  message : `${message.substring(0, 25)}...`}
           </p>
         </div>
       </div>
