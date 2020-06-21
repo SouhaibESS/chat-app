@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch } from "react-router-dom";
-import { Home, Login, Register } from "./pages";
+import { Home, ContactsPage, Login, Register } from "./pages";
 import { PublicRoute, PrivateRoute } from "./components/routes";
 
 function App() {
@@ -8,7 +8,8 @@ function App() {
     <>
       <Switch>
         {/* just passing multiple paths for the home page */}
-        <PrivateRoute component={Home} path="/" exact />
+        <PublicRoute component={Home} path="/" exact />
+        <PublicRoute component={ContactsPage} path="/contacts" />
         <PublicRoute restricted={true} component={Login} path="/login" exact />
         <PublicRoute
           restricted={true}

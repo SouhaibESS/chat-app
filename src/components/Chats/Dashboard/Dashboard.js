@@ -40,10 +40,10 @@ const Dashboard = () => {
           <Link to="/">
             <FiMessageSquare size={28} color="white" />
           </Link>
-          <Link to="/">
+          <Link to="/profile">
             <FiSettings size={28} color="white" />
           </Link>
-          <Link to="/">
+          <Link to="/contacts">
             <FiUser size={28} color="white" />
           </Link>
         </div>
