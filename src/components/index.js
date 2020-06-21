@@ -1,4 +1,5 @@
 import Page from "./Page";
 import Button from "./Button";
 import Chats from "./Chats/Chats";
-export { Page, Button, Chats };
+import Contacts from "./contacts/Contacts";
+export { Page, Button, Chats, Contacts };
