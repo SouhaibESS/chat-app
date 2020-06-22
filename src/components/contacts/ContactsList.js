@@ -37,21 +37,13 @@ const ContactsList = ({ setContact }) => {
     return result;
   };
 
+  // update and sort contacts list when a new contact gets added
   const addContact = (contact) => {
-    /* setContacts((prevContacts) => {
-      prevContacts.push(contact); 
-      let newContacts = prevContacts.sort((a, b) =>
-      a.name > b.name ? 1 : b.name > a.name ? -1 : 0
-      );
-      console.log(prevContacts, newContacts)
-      return newContacts;
-    }); */
-    let prevContacts = contacts;
-    prevContacts.push(contact);
-    let newContacts = prevContacts.sort((a, b) =>
-      a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+    setContacts(
+      [...contacts, contact].sort((a, b) =>
+        a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+      )
     );
-    setContacts(newContacts);
   };
 
   return (
