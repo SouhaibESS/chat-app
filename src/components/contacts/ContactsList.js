@@ -19,7 +19,6 @@ const ContactsList = ({ setContact }) => {
   }, []);
 
   useEffect(() => {
-    console.log(contacts);
   }, [contacts]);
 
   const fetchContacts = async () => {

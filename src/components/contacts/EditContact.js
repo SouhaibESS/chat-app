@@ -1,13 +1,58 @@
 import React, { useState } from "react";
-
-import { FiEdit2, FiMail, FiUser } from "react-icons/fi";
+import { FiEdit2, FiUser } from "react-icons/fi";
 import Modal from "../Modal";
+import { getToken } from "../../helpers";
+import { API_URL } from "../../config";
 
-const EditContact = ({ name }) => {
+const EditContact = ({ name, contactId, updateContact }) => {
+  const [showForm, setFormVisibility] = useState(false);
+  const [newName, setName] = useState("");
+  const [errors, setErrors] = useState({});
+
   const changeShowHandler = () => {
     setFormVisibility(!showForm);
   };
-  const [showForm, setFormVisibility] = useState(false);
+
+  const handleChange = (e) => {
+    const {
+      target: { value },
+    } = e;
+    setName(value);
+    if (value.length < 3) {
+      setErrors({
+        name: "name must be 3 characters long",
+      });
+    } else {
+      setErrors({});
+    }
+  };
+
+  const handlesubmit = async (e) => {
+    e.preventDefault();
+    let data = {
+      name: newName,
+    };
+    data = JSON.stringify(data);
+
+    const response = await fetch(`${API_URL}/contacts/${contactId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "applciation/json",
+        Authorization: `Bearer ${getToken()}`,
+      },
+      body: data,
+    });
+    const result = await response.json();
+
+    if (!result.success) {
+      setErrors(result.message);
+    } else {
+      setName("");
+      updateContact(result.contact)
+      changeShowHandler();
+    }
+  };
+
   return (
     <>
       <FiEdit2
@@ -36,12 +81,16 @@ const EditContact = ({ name }) => {
               <input
                 class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full text-lg py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 id="inline-username"
-                value={name}
+                value={newName ? newName : name}
+                onChange={handleChange}
               />
             </div>
 
             <div className="flex items-end w-100 space-x-2 float-right outline-none">
-              <button className="bg-green-500 p-2 rounded text-sm text-white">
+              <button
+                onClick={handlesubmit}
+                className="bg-green-500 p-2 rounded text-sm text-white"
+              >
                 Edit
               </button>
               <button

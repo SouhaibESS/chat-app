@@ -10,6 +10,11 @@ const Contacts = () => {
   const setContactHandler = (contact = null) => {
     SetContact(contact);
   };
+
+  const deleteContact = () => {
+    SetContact(null);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -19,7 +24,7 @@ const Contacts = () => {
     >
       <Dashboard />
       <ContactsList setContact={setContactHandler} />
-      <ContactCard contact={contact} />
+      <ContactCard deleteContact={deleteContact} contact={contact} />
     </motion.div>
   );
 };
