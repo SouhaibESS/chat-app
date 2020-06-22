@@ -1,30 +1,68 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ContactsSearch from "./ContactsSearch";
 import ContactSummary from "./ContactSummary";
-
 import AddContact from "./AddContact";
+import { getToken } from "../../helpers";
+import { API_URL } from "../../config";
+import { unstable_renderSubtreeIntoContainer } from "react-dom";
+
 const ContactsList = ({ setContact }) => {
-  const contacts = [
-    { id: 21, name: "Hamza El haissouf", email: "hamza@gmail.com" },
-    { id: 73, name: "Hassan Sokmani", email: "hassan@gmail.com" },
-    { id: 34, name: "Adil Soufiane", email: "Adil@gmail.com" },
-    { id: 39, name: "Mustapha kayjo", email: "stayfa@gmail.com" },
-    { id: 32, name: "Stayka El lomani", email: "berdo@gmail.com" },
-  ];
+  const [contacts, setContacts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setContact(contacts[0]);
+    const setData = async () => {
+      const data = await fetchContacts();
+      setContacts(data.contacts);
+    };
+    setData();
   }, []);
+
+  useEffect(() => {
+    console.log(contacts);
+  }, [contacts]);
+
+  const fetchContacts = async () => {
+    const token = getToken();
+    const response = await fetch(`${API_URL}/contacts`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    const result = await response.json();
+
+    return result;
+  };
+
+  const addContact = (contact) => {
+    /* setContacts((prevContacts) => {
+      prevContacts.push(contact); 
+      let newContacts = prevContacts.sort((a, b) =>
+      a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+      );
+      console.log(prevContacts, newContacts)
+      return newContacts;
+    }); */
+    let prevContacts = contacts;
+    prevContacts.push(contact);
+    let newContacts = prevContacts.sort((a, b) =>
+      a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+    );
+    setContacts(newContacts);
+  };
 
   return (
     <div className="flex mt-2 flex-col overflow-scroll p-2 border-r-2">
       <ContactsSearch />
       <div className="flex justify-between items-end  p-4">
         <h4 className="font-bold ">Contacts</h4>
-        <AddContact />
+        <AddContact addContact={addContact} />
       </div>
-      {contacts.map((contact) => (
-        <ContactSummary contact={contact} setContact={setContact} />
+      {contacts.map((contact, key) => (
+        <ContactSummary key={key} contact={contact} setContact={setContact} />
       ))}
     </div>
   );

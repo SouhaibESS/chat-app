@@ -8,8 +8,8 @@ function App() {
     <>
       <Switch>
         {/* just passing multiple paths for the home page */}
-        <PublicRoute component={Home} path="/" exact />
-        <PublicRoute component={ContactsPage} path="/contacts" />
+        <PrivateRoute component={Home} path="/" exact />
+        <PrivateRoute component={ContactsPage} path="/contacts" />
         <PublicRoute restricted={true} component={Login} path="/login" exact />
         <PublicRoute
           restricted={true}

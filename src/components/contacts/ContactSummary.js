@@ -9,7 +9,7 @@ const ContactSummary = ({ contact, setContact }) => {
       <div className="relative ">
         <img
           className=" bg-white h-12 w-12 mx-auto rounded-full  text-center "
-          src={`https://randomuser.me/api/portraits/men/${contact.id}.jpg`}
+          src={contact.avatar}
         />
         <div className=" w-3 h-3 transform -translate-y-3  rounded-full absolute mb-24 right-0  bg-green-400"></div>
       </div>

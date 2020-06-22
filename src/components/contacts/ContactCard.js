@@ -21,13 +21,15 @@ const ContactCard = ({ contact }) => {
           </div>
           <img
             className=" bg-white h-16 w-16 mx-auto rounded-full border-2 transform translate-y-10   text-center "
-            src={`https://randomuser.me/api/portraits/men/${contact.id}.jpg`}
+            src={contact.avatar}
           />
         </div>
         <div className=" w-10/12 mx-auto px-4 py-8 text-center border">
           <h1>{contact.name}</h1>
           <h6 className=" text-gray-500 font-hairline">alias</h6>
           <ul className="mt-5 flex flex-col space-y-8">
+            {/* TODO: add phone number to contact
+            
             {contact.phone ? (
               <li>
                 <div className="flex items-center ml-3   w-1/2 space-x-5">
@@ -44,7 +46,7 @@ const ContactCard = ({ contact }) => {
                   <p>0677717615</p>
                 </div>
               </li>
-            )}
+            )} */}
             <li>
               <div className="flex items-center ml-3   w-1/2 space-x-5">
                 <FiMail size={"20px"} className=" text-gray-500" />
