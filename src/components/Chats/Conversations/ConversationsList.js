@@ -8,7 +8,6 @@ const ConversationsList = ({ conversations, setCurrentConversation }) => {
       {
         // TODO SPINNER WHEN THE PAGE IS LOADING
         conversations
-          .filter((conversation) => conversation.last_message)
           .map((conversation, index) => (
             <ConversationSummary
               setCurrentConversation={setCurrentConversation}

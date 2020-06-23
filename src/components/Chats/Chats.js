@@ -6,10 +6,12 @@ import { motion } from "framer-motion";
 import { API_URL } from "../../config";
 import { getToken, getUser } from "../../helpers";
 import { echo } from "../../global";
+import messages from "../../assets/data/Messages";
 
 const Chats = () => {
   const [conversation, setConversation] = useState(null);
   const [conversations, setConversations] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -22,6 +24,10 @@ const Chats = () => {
     setLoading(false);
     updateConversations();
   }, []);
+
+  useEffect(() => {
+    console.log(conversations);
+  }, [conversations]);
 
   const fetchConversations = async () => {
     const token = getToken();
@@ -62,6 +68,44 @@ const Chats = () => {
 
   const setCurrentConversation = (conv) => {
     setConversation(conv);
+    updateSearchTerm("");
+  };
+
+  // when the user searches for a conversation
+  const updateSearchTerm = (term = "") => {
+    setSearchTerm(term);
+  };
+
+  // update conversation last message when the user sents a message
+  const sendMessageUpdate = (message, conversationId) => {
+    let lastConversation = {};
+    setConversations(
+      [...conversations].map((conversation) => {
+        if (conversation.id === conversationId) {
+          conversation = {
+            ...conversation,
+            last_message: message,
+          };
+          lastConversation = conversation;
+        }
+        return conversation;
+      })
+    );
+    setConversations([
+      lastConversation,
+      ...conversations.filter((conv) => {
+        if (conv.id != conversationId) {
+          return conv;
+        }
+      }),
+    ]);
+    // setConversations([lastConversation, ...conversations]);
+  };
+
+  const renderConversations = () => {
+    return conversations
+      .filter((conv) => conv.last_message) // the conversations with no messages are not shown
+      .filter((conv) => conv.other_user.name.includes(searchTerm)); // filter the conversations when the user searches for a conversation
   };
 
   return (
@@ -73,10 +117,14 @@ const Chats = () => {
     >
       <Dashboard />
       <Conversations
-        conversations={conversations}
+        updateSearchTerm={updateSearchTerm}
+        conversations={renderConversations()}
         setCurrentConversation={setCurrentConversation}
       />
-      <Conversation conversation={conversation} />
+      <Conversation
+        sendMessageUpdate={sendMessageUpdate}
+        conversation={conversation}
+      />
     </motion.div>
   );
 };

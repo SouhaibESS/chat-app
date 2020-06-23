@@ -4,7 +4,6 @@ import ContactSummary from "./ContactSummary";
 import AddContact from "./AddContact";
 import { getToken } from "../../helpers";
 import { API_URL } from "../../config";
-import { unstable_renderSubtreeIntoContainer } from "react-dom";
 
 const ContactsList = ({ setContact }) => {
   const [contacts, setContacts] = useState([]);

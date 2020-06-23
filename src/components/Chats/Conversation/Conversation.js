@@ -8,7 +8,7 @@ import { getToken, getUser } from "../../../helpers";
 import { API_URL } from "../../../config";
 import { echo } from "../../../global";
 
-const Conversation = ({ conversation }) => {
+const Conversation = ({ conversation, sendMessageUpdate }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const user = conversation && conversation.other_user;
@@ -38,6 +38,7 @@ const Conversation = ({ conversation }) => {
     };
     const result = await fetchRequest(endpoint, method, body);
     const lastMessage = result.message;
+    sendMessageUpdate(lastMessage, conversation.id);
     setMessages([...messages, lastMessage]);
   };
 
