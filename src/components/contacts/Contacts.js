@@ -3,7 +3,7 @@ import Dashboard from "../Chats/Dashboard/Dashboard";
 import ContactsList from "./ContactsList";
 import { motion } from "framer-motion";
 import ContactCard from "./ContactCard";
-import Modal from "../Modal";
+
 const Contacts = () => {
   const [contact, SetContact] = useState(null);
 

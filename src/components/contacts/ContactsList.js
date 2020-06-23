@@ -8,6 +8,7 @@ import { unstable_renderSubtreeIntoContainer } from "react-dom";
 
 const ContactsList = ({ setContact }) => {
   const [contacts, setContacts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -18,8 +19,7 @@ const ContactsList = ({ setContact }) => {
     setData();
   }, []);
 
-  useEffect(() => {
-  }, [contacts]);
+  useEffect(() => {}, [contacts, searchTerm]);
 
   const fetchContacts = async () => {
     const token = getToken();
@@ -45,16 +45,26 @@ const ContactsList = ({ setContact }) => {
     );
   };
 
+  const updateSearchTerm = (term = "") => {
+    setSearchTerm(term);
+  };
+
+  const renderContacts = () => {
+    return contacts
+      .filter((contact) => contact.name.includes(searchTerm))
+      .map((contact, key) => (
+        <ContactSummary key={key} contact={contact} setContact={setContact} />
+      ));
+  };
+
   return (
     <div className="flex mt-2 flex-col overflow-scroll p-2 border-r-2">
-      <ContactsSearch />
+      <ContactsSearch updateSearchTerm={updateSearchTerm} />
       <div className="flex justify-between items-end  p-4">
         <h4 className="font-bold ">Contacts</h4>
         <AddContact addContact={addContact} />
       </div>
-      {contacts.map((contact, key) => (
-        <ContactSummary key={key} contact={contact} setContact={setContact} />
-      ))}
+      {renderContacts()}
     </div>
   );
 };

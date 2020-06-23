@@ -25,7 +25,6 @@ const ContactCard = ({ contact, deleteContact }) => {
     setContact(newContact);
   };
 
-
   const handleDelete = async (e) => {
     e.preventDefault()
     const response = await fetch(`${API_URL}/contacts/${contact.contact_id}`,{
