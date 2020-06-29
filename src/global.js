@@ -1,7 +1,7 @@
-import Pusher from 'pusher-js'
-import Echo from 'laravel-echo'
-import { getToken } from './helpers'
-import { options } from './config'
+import Pusher from "pusher-js";
+import Echo from "laravel-echo";
+import { getToken, getUser } from "./helpers";
+import { options } from "./config";
 
 const pusherOptions = {
   ...options,
@@ -13,4 +13,6 @@ const pusherOptions = {
   },
 };
 
+const user = getUser();
 export const echo = new Echo(pusherOptions);
+export const userChannel = echo.private(`user.${user && user.id}`);

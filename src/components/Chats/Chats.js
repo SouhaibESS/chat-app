@@ -5,8 +5,7 @@ import Conversation from "../Chats/Conversation/Conversation";
 import { motion } from "framer-motion";
 import { API_URL } from "../../config";
 import { getToken, getUser } from "../../helpers";
-import { echo } from "../../global";
-import messages from "../../assets/data/Messages";
+import { userChannel } from "../../global";
 
 const Chats = () => {
   const [conversation, setConversation] = useState(null);
@@ -25,9 +24,16 @@ const Chats = () => {
     updateConversations();
   }, []);
 
-  useEffect(() => {
-    console.log(conversations);
-  }, [conversations]);
+  /*useEffect(() => {
+    updateConversations();
+    return function cleanup() {
+      userChannel
+        .stopListening("newMessageEvent")
+        .stopListening("messagesSeenEvent");
+    };
+  }, [conversation]);*/
+
+  useEffect(() => {}, [conversations]);
 
   const fetchConversations = async () => {
     const token = getToken();
@@ -46,24 +52,21 @@ const Chats = () => {
 
   // when a conversation recieve a new message we want that conversation to be at the top
   const updateConversations = () => {
-    const user = getUser();
-    echo
-      .private(`user.${user && user.id}`)
-      .listen("newMessageEvent", (data) => {
-        const conversationUpdate = [data.conversation_update];
+    userChannel.listen("newMessageEvent", (data) => {
+      const conversationUpdate = [data.conversation_update];
 
-        setConversations((oldConversations) => {
-          const filteredConversations = oldConversations.filter(
-            (conv) => conv.id != conversationUpdate[0].id
-          );
+      setConversations((oldConversations) => {
+        const filteredConversations = oldConversations.filter(
+          (conv) => conv.id != conversationUpdate[0].id
+        );
 
-          const newConversations = conversationUpdate.concat(
-            filteredConversations
-          );
+        const newConversations = conversationUpdate.concat(
+          filteredConversations
+        );
 
-          return newConversations;
-        });
+        return newConversations;
       });
+    });
   };
 
   const setCurrentConversation = (conv) => {

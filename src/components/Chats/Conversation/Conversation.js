@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Pusher from "pusher-js";
-import Echo from "laravel-echo";
 import ConversationHeader from "./ConversationHeader";
 import ConversationsActions from "./ConversationActions";
 import ConversationsFeed from "./ConversationFeed";
 import { getToken, getUser } from "../../../helpers";
 import { API_URL } from "../../../config";
-import { echo } from "../../../global";
+import { userChannel } from "../../../global";
 
 const Conversation = ({ conversation, sendMessageUpdate }) => {
   const [messages, setMessages] = useState([]);
@@ -21,8 +19,16 @@ const Conversation = ({ conversation, sendMessageUpdate }) => {
       setLoading(false);
     };
     setData();
-    receiveMessages();
+    conversation && sendMessagesSeenNotification();
+    receiveNotifications(conversation);
+    return function cleanup() {
+      userChannel
+        .stopListening("newMessageEvent")
+        .stopListening("messagesSeenEvent");
+    };
   }, [conversation]);
+
+  useEffect(() => {}, [messages]);
 
   const fetchMessages = async () => {
     const endpoint = `${API_URL}/conversations/${conversation.id}`;
@@ -42,18 +48,37 @@ const Conversation = ({ conversation, sendMessageUpdate }) => {
     setMessages([...messages, lastMessage]);
   };
 
-  const receiveMessages = () => {
-    const user = getUser();
-    echo
-      .private(`user.${user && user.id}`)
+  const receiveNotifications = (conv) => {
+    userChannel
       .listen("newMessageEvent", (data) => {
         const lastMessage = data.conversation_update.last_message;
         const conversationId = data.conversation_update.id;
-        if (conversationId === (conversation && conversation.id))
+        if (conversationId === (conv && conv.id)) {
+          // when the user is already opening the conversation
+          // we send notification that messages are seen
+          sendMessagesSeenNotification();
+
           setMessages((prevMessages) => {
             return prevMessages && prevMessages.concat(lastMessage);
           });
+        }
+      })
+      .listen("messagesSeenEvent", (data) => {
+        const conversationId = data.conversation_update.id;
+        if (conversationId == (conv && conv.id))
+          setMessages((messages) => {
+            return messages.map((message) => {
+              if (message.user_id == user.id) message.seen = 1;
+              return message;
+            });
+          });
       });
+  };
+
+  const sendMessagesSeenNotification = async () => {
+    const endpoint = `${API_URL}/conversations/${conversation.id}`;
+    const method = "PUT";
+    const result = await fetchRequest(endpoint, method);
   };
 
   const fetchRequest = async (endpoint, method = "GET", body = null) => {
